@@ -1,24 +1,18 @@
-# use the latest ubuntu environment (18.04) available on travis
 dist: xenial
-
+sudo: required
 language: go
+os:
+- linux
 
-# Force-enable Go modules. Also force go to use the code in vendor/
-# These will both be unnecessary when Go 1.14 lands.
-#env: GO111MODULE=on GOFLAGS='-mod vendor'
-
-# You don't need to test on very old versions of the Go compiler. It's the user's
-# responsibility to keep their compiler up to date.
 go:
   - 1.13.x
 
-# Only clone the most recent commit.
-git:
-  depth: 1
 
-# Skip the install step. Don't `go get` dependencies. Only build with the code
-# in vendor/
-install: false
 
-script:
-  - golangci-lint run       # run a bunch of code checkers/linters in parallel
+before_install:
+  - sudo apt-get install -y libev4
+  - git clone https://github.com/atolab/zenoh-c && cd zenoh-c && git checkout 0.3.0 && make && sudo make install && cd ..
+
+
+install:
+  - go build ./fog05
