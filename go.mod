@@ -2,4 +2,8 @@ module fog05
 
 go 1.13
 
-require github.com/eclipse-fog05/sdk-go v0.0.0-20191216091715-c63fb15237cb // indirect
+require (
+	github.com/atolab/yaks-go v0.3.0
+	github.com/eclipse-fog05/sdk-go v0.1.0
+	github.com/google/uuid v1.1.1
+)
