@@ -15,8 +15,8 @@ package fog05
 
 import (
 	"encoding/json"
-
 	"math/rand"
+	"strconv"
 	"time"
 
 	"github.com/atolab/yaks-go"
@@ -52,7 +52,8 @@ func (rf *RunningFDU) runJob() {
 		rf.resultChan <- -255
 		rf.err = &err
 	} else {
-		rf.resultChan <- (*res.Result).(int)
+		i, _ := strconv.Atoi(*res.Result)
+		rf.resultChan <- i
 		rf.err = nil
 	}
 
@@ -89,8 +90,7 @@ func (rf *RunningFDU) GetResult() (int, string, error) {
 		}
 
 		rf.exitCode = code
-		l := (*log.Result).(string)
-		rf.log = &l
+		rf.log = log.Result
 	}
 	return rf.exitCode, *rf.log, nil
 }
@@ -287,8 +287,7 @@ func (n *NetworkAPI) ConnectCPToNetwork(cpid string, netid string) (*string, err
 		return nil, &fog05sdk.FError{*res.ErrorMessage + " ErrNo: " + string(*res.Error), nil}
 	}
 
-	v := (*res.Result).(string)
-	return &v, nil
+	return res.Result, nil
 }
 
 // DisconnectCP disconnect the specified connection point and returns its id
@@ -321,8 +320,7 @@ func (n *NetworkAPI) DisconnectCP(cpid string) (*string, error) {
 		return nil, &fog05sdk.FError{*res.ErrorMessage + " ErrNo: " + string(*res.Error), nil}
 	}
 
-	v := (*res.Result).(string)
-	return &v, nil
+	return res.Result, nil
 }
 
 // AddRouter creates a new virtual router in the specified node and returns the associated RouterRecord object
@@ -467,8 +465,14 @@ func (n *NetworkAPI) AssignFloatingIP(nodeid string, ipid string, cpid string) (
 		return nil, &fog05sdk.FError{*res.ErrorMessage + " ErrNo: " + string(*res.Error), nil}
 	}
 
-	v := (*res.Result).(fog05sdk.FloatingIPRecord)
-	return &v, nil
+	myVar := fog05sdk.FloatingIPRecord{}
+	err = json.Unmarshal([]byte(*res.Result), &myVar)
+	if err != nil {
+		er := fog05sdk.FError{"Error on conversion: " + err.Error(), nil}
+		return nil, &er
+	}
+
+	return &myVar, nil
 }
 
 // RetainFloatingIP retain the previously assigned floating ip and returns the FloatingIPRecord object associated
@@ -681,7 +685,7 @@ func (f *FDUAPI) Start(instanceid string, env *string) (string, error) {
 		return "", &fog05sdk.FError{*res.ErrorMessage + " ErrNo: " + string(*res.Error), nil}
 	}
 
-	return (*res.Result).(string), nil
+	return *res.Result, nil
 
 }
 

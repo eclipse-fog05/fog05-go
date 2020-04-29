@@ -13,6 +13,8 @@ github.com/eclipse-fog05/sdk-go v0.1.0 h1:RjzXR4rmdZzSWaU3WtlzTZkylmkjWGOuw1pVTA
 github.com/eclipse-fog05/sdk-go v0.1.0/go.mod h1:UPQANX/4L5xMOeniR2rkKZ5ARMRrN8P/F+ixl7xFrHQ=
 github.com/gabrik/sdk-go v0.0.0-20200428160909-34148dcdd771 h1:rBZx6b+jUjDxLkObAwwdB3wa2gpl0PdflSFPGl74xpU=
 github.com/gabrik/sdk-go v0.0.0-20200428160909-34148dcdd771/go.mod h1:UPQANX/4L5xMOeniR2rkKZ5ARMRrN8P/F+ixl7xFrHQ=
+github.com/gabrik/sdk-go v0.0.0-20200429142714-30fc4cbf8d70 h1:DNw+bTn1uFi7Ho4u+1t9efYJVQ7bnfMrZa2X/bBpEvo=
+github.com/gabrik/sdk-go v0.0.0-20200429142714-30fc4cbf8d70/go.mod h1:UPQANX/4L5xMOeniR2rkKZ5ARMRrN8P/F+ixl7xFrHQ=
 github.com/google/uuid v1.1.1 h1:Gkbcsh/GbpXz7lPftLA3P6TYMwjCLYm83jiFQZF/3gY=
 github.com/google/uuid v1.1.1/go.mod h1:TIyPZe4MgqvfeYDBFedMoGGpEw/LqOeaOT+nhxU+yHo=
 github.com/konsorten/go-windows-terminal-sequences v1.0.1/go.mod h1:T0+1ngSBFLxvqU3pZ+m/2kptfBszLMUkC4ZK/EgS/cQ=
