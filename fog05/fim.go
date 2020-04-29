@@ -13,6 +13,85 @@ import (
 	"github.com/google/uuid"
 )
 
+// RunningFDU represents an FDU that is running in blocking fashion
+type RunningFDU struct {
+	systemID    string
+	tenantID    string
+	connector   *fog05sdk.YaksConnector
+	instanceID  string
+	envinonment string
+	started     bool
+	exitCode    int
+	log         *string
+	err         *error
+	resultChan  chan int
+}
+
+// NewRunningFDU returns a new RunningFDU objects
+func NewRunningFDU(connector *fog05sdk.YaksConnector, sysid string, tenantid string, instanceid string, env string) *RunningFDU {
+	return &RunningFDU{sysid, tenantid, connector, instanceid, env, false, -255, nil, nil, make(chan int, 1)}
+}
+
+func (rf *RunningFDU) runJob() {
+	rf.started = true
+	res, err := rf.connector.Global.Actual.RunFDUInNode(rf.systemID, rf.tenantID, rf.instanceID, rf.envinonment)
+	if err != nil {
+		rf.resultChan <- -255
+		rf.err = &err
+	} else {
+		rf.resultChan <- (*res.Result).(int)
+		rf.err = nil
+	}
+
+}
+
+// Run submits the run of the FDU
+func (rf *RunningFDU) Run() error {
+	if !rf.started {
+		rf.exitCode = -255
+		rf.log = nil
+		go rf.runJob()
+		return nil
+	}
+	return &fog05sdk.FError{"FDU is still running, wait it to finish before restarting", nil}
+
+}
+
+// GetResult waits for the FDU to terminate its execution
+func (rf *RunningFDU) GetResult() (int, string, error) {
+	if rf.exitCode == -255 && rf.log == nil {
+		code := <-rf.resultChan
+		if rf.err != nil {
+			return -255, "", *rf.err
+		}
+		rf.err = nil
+		log, err := rf.connector.Global.Actual.LogFDUInNode(rf.systemID, rf.tenantID, rf.instanceID)
+		if err != nil {
+			return -255, "", err
+		}
+		rf.started = false
+
+		if log.Error != nil {
+			return -255, "", &fog05sdk.FError{*log.ErrorMessage + " ErrNo: " + string(*log.Error), nil}
+		}
+
+		rf.exitCode = code
+		l := (*log.Result).(string)
+		rf.log = &l
+	}
+	return rf.exitCode, *rf.log, nil
+}
+
+// GetLog returns the log of the FDU if present
+func (rf *RunningFDU) GetLog() *string {
+	return rf.log
+}
+
+// GetCode returns the exit code of the FDU if present
+func (rf *RunningFDU) GetCode() int {
+	return rf.exitCode
+}
+
 // NodeAPI is a component of FIMAPI
 type NodeAPI struct {
 	connector *fog05sdk.YaksConnector
@@ -576,9 +655,37 @@ func (f *FDUAPI) Clean(instanceid string) (string, error) {
 	return f.changeFDUInstanceState(instanceid, fog05sdk.CLEAN, fog05sdk.DEFINE)
 }
 
-// Start the specified FDU instance and returns its UUID
-func (f *FDUAPI) Start(instanceid string) (string, error) {
-	return f.changeFDUInstanceState(instanceid, fog05sdk.RUN, fog05sdk.RUN)
+// Start starts the specified FDU instance and returns its UUID
+func (f *FDUAPI) Start(instanceid string, env *string) (string, error) {
+	var environment string
+	if env != nil {
+		environment = *env
+	} else {
+		environment = ""
+	}
+	res, err := f.connector.Global.Actual.StartFDUInNode(f.sysid, f.tenantid, instanceid, environment)
+	if err != nil {
+		return "", &fog05sdk.FError{*res.ErrorMessage + " ErrNo: " + string(*res.Error), nil}
+	}
+
+	return (*res.Result).(string), nil
+
+}
+
+// Run runs the specified FDU instance and returns the RunningFDU object associated
+func (f *FDUAPI) Run(instanceid string, env *string) RunningFDU {
+	var environment string
+	if env != nil {
+		environment = *env
+	} else {
+		environment = ""
+	}
+
+	res := NewRunningFDU(f.connector, f.sysid, f.tenantid, instanceid, environment)
+	res.Run()
+
+	return *res
+
 }
 
 // Stop the specified FDU instance and returns its UUID
@@ -613,7 +720,7 @@ func (f *FDUAPI) Instantiate(nodeid string, fduid string) (string, error) {
 		return fdur.UUID, err
 	}
 	time.Sleep(500 * time.Millisecond)
-	_, err = f.Start(fdur.UUID)
+	_, err = f.Start(fdur.UUID, nil)
 	return fdur.UUID, err
 }
 
