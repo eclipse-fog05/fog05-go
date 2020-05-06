@@ -11,6 +11,8 @@ github.com/eclipse-fog05/sdk-go v0.0.0-20191216091715-c63fb15237cb h1:XFRnAalRyV
 github.com/eclipse-fog05/sdk-go v0.0.0-20191216091715-c63fb15237cb/go.mod h1:UPQANX/4L5xMOeniR2rkKZ5ARMRrN8P/F+ixl7xFrHQ=
 github.com/eclipse-fog05/sdk-go v0.1.0 h1:RjzXR4rmdZzSWaU3WtlzTZkylmkjWGOuw1pVTARIVUs=
 github.com/eclipse-fog05/sdk-go v0.1.0/go.mod h1:UPQANX/4L5xMOeniR2rkKZ5ARMRrN8P/F+ixl7xFrHQ=
+github.com/eclipse-fog05/sdk-go v0.1.1-0.20200506091819-bd74ddb7a662 h1:5lc5YRUc0X9iZTqjvidLeOz7DTDTT3altFENPYjH4Bg=
+github.com/eclipse-fog05/sdk-go v0.1.1-0.20200506091819-bd74ddb7a662/go.mod h1:UPQANX/4L5xMOeniR2rkKZ5ARMRrN8P/F+ixl7xFrHQ=
 github.com/gabrik/sdk-go v0.0.0-20200428160909-34148dcdd771 h1:rBZx6b+jUjDxLkObAwwdB3wa2gpl0PdflSFPGl74xpU=
 github.com/gabrik/sdk-go v0.0.0-20200428160909-34148dcdd771/go.mod h1:UPQANX/4L5xMOeniR2rkKZ5ARMRrN8P/F+ixl7xFrHQ=
 github.com/gabrik/sdk-go v0.0.0-20200429142714-30fc4cbf8d70 h1:DNw+bTn1uFi7Ho4u+1t9efYJVQ7bnfMrZa2X/bBpEvo=
