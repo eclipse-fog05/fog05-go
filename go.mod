@@ -1,4 +1,4 @@
-module fog05
+module github.com/eclipse-fog05/api-go
 
 go 1.13
 
