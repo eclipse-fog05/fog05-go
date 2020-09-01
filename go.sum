@@ -2,6 +2,8 @@ github.com/atolab/yaks-go v0.3.0 h1:UWC6C5W5cNf81wHwf0hyX4mW5kVnx4dvg/r8oYOSUMc=
 github.com/atolab/yaks-go v0.3.0/go.mod h1:lW0xMn0OMeVoMFp/SwsuIgZjhQO/YY8UFcJMGic3dvs=
 github.com/atolab/zenoh-go v0.3.0 h1:ZaMfrLAJeFSMvkZuWNaxgC3nhzzO8gUeiUEJC+Zq9io=
 github.com/atolab/zenoh-go v0.3.0/go.mod h1:3Ek15mksXcvo9kZiuRnJT1T5v9eXUvLYB8RLa4nctKM=
+github.com/atolab/zenoh-go v0.3.1 h1:Ab/2i+j05cGskkM6oswFLy6I5dhSDg+xxyZMLFN8jSw=
+github.com/atolab/zenoh-go v0.3.1/go.mod h1:3Ek15mksXcvo9kZiuRnJT1T5v9eXUvLYB8RLa4nctKM=
 github.com/creack/pty v1.1.7/go.mod h1:lj5s0c3V2DBrqTV7llrYr5NG6My20zk30Fl46Y7DoTY=
 github.com/creack/pty v1.1.9/go.mod h1:oKZEueFk5CKHvIhNR5MUki03XCEU+Q6VDXinZuGJ33E=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
@@ -13,6 +15,8 @@ github.com/eclipse-fog05/sdk-go v0.1.0 h1:RjzXR4rmdZzSWaU3WtlzTZkylmkjWGOuw1pVTA
 github.com/eclipse-fog05/sdk-go v0.1.0/go.mod h1:UPQANX/4L5xMOeniR2rkKZ5ARMRrN8P/F+ixl7xFrHQ=
 github.com/eclipse-fog05/sdk-go v0.1.1-0.20200506091819-bd74ddb7a662 h1:5lc5YRUc0X9iZTqjvidLeOz7DTDTT3altFENPYjH4Bg=
 github.com/eclipse-fog05/sdk-go v0.1.1-0.20200506091819-bd74ddb7a662/go.mod h1:UPQANX/4L5xMOeniR2rkKZ5ARMRrN8P/F+ixl7xFrHQ=
+github.com/eclipse-fog05/sdk-go v0.2.0 h1:67ZwozAuOMc6Aa3nR8CyEQF8qzE5h5AuQkqkERWBzHw=
+github.com/eclipse-fog05/sdk-go v0.2.0/go.mod h1:UPQANX/4L5xMOeniR2rkKZ5ARMRrN8P/F+ixl7xFrHQ=
 github.com/gabrik/sdk-go v0.0.0-20200428160909-34148dcdd771 h1:rBZx6b+jUjDxLkObAwwdB3wa2gpl0PdflSFPGl74xpU=
 github.com/gabrik/sdk-go v0.0.0-20200428160909-34148dcdd771/go.mod h1:UPQANX/4L5xMOeniR2rkKZ5ARMRrN8P/F+ixl7xFrHQ=
 github.com/gabrik/sdk-go v0.0.0-20200429142714-30fc4cbf8d70 h1:DNw+bTn1uFi7Ho4u+1t9efYJVQ7bnfMrZa2X/bBpEvo=
@@ -21,6 +25,8 @@ github.com/gabrik/sdk-go v0.0.0-20200429160826-8967d42465f8 h1:qkoUW2DE5HQekp8c9
 github.com/gabrik/sdk-go v0.0.0-20200429160826-8967d42465f8/go.mod h1:UPQANX/4L5xMOeniR2rkKZ5ARMRrN8P/F+ixl7xFrHQ=
 github.com/google/uuid v1.1.1 h1:Gkbcsh/GbpXz7lPftLA3P6TYMwjCLYm83jiFQZF/3gY=
 github.com/google/uuid v1.1.1/go.mod h1:TIyPZe4MgqvfeYDBFedMoGGpEw/LqOeaOT+nhxU+yHo=
+github.com/google/uuid v1.1.2 h1:EVhdT+1Kseyi1/pUmXKaFxYsDNy9RQYkMWRH68J/W7Y=
+github.com/google/uuid v1.1.2/go.mod h1:TIyPZe4MgqvfeYDBFedMoGGpEw/LqOeaOT+nhxU+yHo=
 github.com/konsorten/go-windows-terminal-sequences v1.0.1/go.mod h1:T0+1ngSBFLxvqU3pZ+m/2kptfBszLMUkC4ZK/EgS/cQ=
 github.com/konsorten/go-windows-terminal-sequences v1.0.2 h1:DB17ag19krx9CFsz4o3enTrPXyIXCl+2iCXH/aMAp9s=
 github.com/konsorten/go-windows-terminal-sequences v1.0.2/go.mod h1:T0+1ngSBFLxvqU3pZ+m/2kptfBszLMUkC4ZK/EgS/cQ=
