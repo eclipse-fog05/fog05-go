@@ -19,8 +19,12 @@ github.com/gabrik/sdk-go v0.0.0-20200429142714-30fc4cbf8d70 h1:DNw+bTn1uFi7Ho4u+
 github.com/gabrik/sdk-go v0.0.0-20200429142714-30fc4cbf8d70/go.mod h1:UPQANX/4L5xMOeniR2rkKZ5ARMRrN8P/F+ixl7xFrHQ=
 github.com/gabrik/sdk-go v0.0.0-20200429160826-8967d42465f8 h1:qkoUW2DE5HQekp8c9UyLm0U4BkjTaXsX4KW9OLJiBlQ=
 github.com/gabrik/sdk-go v0.0.0-20200429160826-8967d42465f8/go.mod h1:UPQANX/4L5xMOeniR2rkKZ5ARMRrN8P/F+ixl7xFrHQ=
+github.com/gabrik/sdk-go v0.0.0-20200901124809-98cbd2021c34 h1:dnXvjg+jhKAB6nyNuj1GSbDI31U1N54XLCpXnbt4mFo=
+github.com/gabrik/sdk-go v0.0.0-20200901124809-98cbd2021c34/go.mod h1:UPQANX/4L5xMOeniR2rkKZ5ARMRrN8P/F+ixl7xFrHQ=
 github.com/google/uuid v1.1.1 h1:Gkbcsh/GbpXz7lPftLA3P6TYMwjCLYm83jiFQZF/3gY=
 github.com/google/uuid v1.1.1/go.mod h1:TIyPZe4MgqvfeYDBFedMoGGpEw/LqOeaOT+nhxU+yHo=
+github.com/google/uuid v1.1.2 h1:EVhdT+1Kseyi1/pUmXKaFxYsDNy9RQYkMWRH68J/W7Y=
+github.com/google/uuid v1.1.2/go.mod h1:TIyPZe4MgqvfeYDBFedMoGGpEw/LqOeaOT+nhxU+yHo=
 github.com/konsorten/go-windows-terminal-sequences v1.0.1/go.mod h1:T0+1ngSBFLxvqU3pZ+m/2kptfBszLMUkC4ZK/EgS/cQ=
 github.com/konsorten/go-windows-terminal-sequences v1.0.2 h1:DB17ag19krx9CFsz4o3enTrPXyIXCl+2iCXH/aMAp9s=
 github.com/konsorten/go-windows-terminal-sequences v1.0.2/go.mod h1:T0+1ngSBFLxvqU3pZ+m/2kptfBszLMUkC4ZK/EgS/cQ=
