@@ -173,6 +173,12 @@ func (n *NetworkAPI) AddNetwork(descriptor fog05sdk.VirtualNetwork) error {
 	return n.connector.Global.Desired.AddNetwork(n.sysid, n.tenantid, descriptor.UUID, descriptor)
 }
 
+// GetNetwork gets a virtual network from the system catalog
+func (n *NetworkAPI) GetNetwork(netid string) (*fog05sdk.VirtualNetwork, error) {
+	return n.connector.Global.Actual.GetNetwork(n.sysid, n.tenantid, netid)
+
+}
+
 // RemoveNetwork remove a virtual network from the system catalog
 func (n *NetworkAPI) RemoveNetwork(netid string) error {
 	return n.connector.Global.Desired.RemoveNetwork(n.sysid, n.tenantid, netid)
