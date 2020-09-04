@@ -617,13 +617,39 @@ func (f *FDUAPI) Offload(fduid string) (string, error) {
 	return fduid, err
 }
 
+// GetCompatibleNodes gets a list off compatible nodes in the system for the given fdu, node compatibility verification is decentralized each node verifies and then replies
+func (f *FDUAPI) GetCompatibleNodes(fduid string) ([]string, error) {
+	nodes := []string{}
+	fdu, err := f.connector.Global.Actual.GetCatalogFDUInfo(f.sysid, f.tenantid, fduid)
+	if err != nil {
+		return nodes, err
+	}
+	res, err := f.connector.Global.Actual.CallMultiNodeCheck(f.sysid, f.tenantid, *fdu)
+	if err != nil {
+		return nodes, err
+	}
+	for _, evr := range res {
+		var compatibility fog05sdk.CompatibleNodeResponse
+		v, err := json.Marshal(evr.Result)
+		if err != nil {
+			return nodes, err
+		}
+
+		err = json.Unmarshal([]byte(v), &compatibility)
+		if err != nil {
+			return nodes, err
+		}
+		if compatibility.IsCompatible {
+			nodes = append(nodes, compatibility.UUID)
+		}
+	}
+	return nodes, nil
+}
+
 // Define creates and FDU Instance for the specified FDU in the specified node and returns the FDURecord object associated
 func (f *FDUAPI) Define(nodeid string, fduid string) (*fog05sdk.FDURecord, error) {
 	var fdu fog05sdk.FDURecord
-	_, err := f.connector.Global.Actual.GetCatalogFDUInfo(f.sysid, f.tenantid, fduid)
-	if err != nil {
-		return nil, err
-	}
+
 	res, err := f.connector.Global.Actual.DefineFDUInNode(f.sysid, f.tenantid, nodeid, fduid)
 	if err != nil {
 		return nil, err
