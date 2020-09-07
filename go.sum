@@ -28,6 +28,8 @@ github.com/gabrik/sdk-go v0.0.0-20200904094556-0482d1f584cb h1:KQLnwl2gE21JOygT+
 github.com/gabrik/sdk-go v0.0.0-20200904094556-0482d1f584cb/go.mod h1:ZKGOJ5VzMjQRL3NexJG6x/vz8i0YxyM07LB+jKHoLUI=
 github.com/gabrik/sdk-go v0.0.0-20200907095751-b96077661869 h1:sAroa+TLZ/DdfjmRqJarODMeB3XtACWF/B/iLJAUSxM=
 github.com/gabrik/sdk-go v0.0.0-20200907095751-b96077661869/go.mod h1:ZKGOJ5VzMjQRL3NexJG6x/vz8i0YxyM07LB+jKHoLUI=
+github.com/gabrik/sdk-go v0.0.0-20200907124239-c92be99b23f6 h1:RDZmkP65js/Q67YexpA+2Wm8cjFp7yLMHicFBNjx5sQ=
+github.com/gabrik/sdk-go v0.0.0-20200907124239-c92be99b23f6/go.mod h1:ZKGOJ5VzMjQRL3NexJG6x/vz8i0YxyM07LB+jKHoLUI=
 github.com/google/uuid v1.1.1 h1:Gkbcsh/GbpXz7lPftLA3P6TYMwjCLYm83jiFQZF/3gY=
 github.com/google/uuid v1.1.1/go.mod h1:TIyPZe4MgqvfeYDBFedMoGGpEw/LqOeaOT+nhxU+yHo=
 github.com/google/uuid v1.1.2 h1:EVhdT+1Kseyi1/pUmXKaFxYsDNy9RQYkMWRH68J/W7Y=

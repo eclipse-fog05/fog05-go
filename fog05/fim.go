@@ -630,12 +630,8 @@ func (f *FDUAPI) GetCompatibleNodes(fduid string) ([]string, error) {
 	}
 	for _, evr := range res {
 		var compatibility fog05sdk.CompatibleNodeResponse
-		v, err := json.Marshal(evr.Result)
-		if err != nil {
-			return nodes, err
-		}
 
-		err = json.Unmarshal([]byte(v), &compatibility)
+		err = json.Unmarshal([]byte(*evr.Result), &compatibility)
 		if err != nil {
 			return nodes, err
 		}
