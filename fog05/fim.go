@@ -599,12 +599,12 @@ func (f *FDUAPI) Onboard(descriptor fog05sdk.FDU) (*fog05sdk.FDU, error) {
 		return nil, &fog05sdk.FError{*res.ErrorMessage + " ErrNo: " + string(*res.Error), nil}
 	}
 
-	v, err := json.Marshal(*res.Result)
-	if err != nil {
-		return nil, err
-	}
+	// v, err := json.Marshal(*res.Result)
+	// if err != nil {
+	// 	return nil, err
+	// }
 
-	err = json.Unmarshal([]byte(v), &fdu)
+	err = json.Unmarshal([]byte(*res.Result), &fdu)
 	if err != nil {
 		return nil, err
 	}
