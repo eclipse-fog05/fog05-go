@@ -202,12 +202,8 @@ func (n *NetworkAPI) AddNetworkToNode(nodeid string, descriptor fog05sdk.Virtual
 	}
 
 	var net fog05sdk.VirtualNetwork
-	v, err := json.Marshal(*res.Result)
-	if err != nil {
-		return nil, err
-	}
 
-	err = json.Unmarshal([]byte(v), &net)
+	err = json.Unmarshal([]byte(*res.Result), &net)
 	if err != nil {
 		return nil, err
 	}
@@ -230,12 +226,8 @@ func (n *NetworkAPI) RemoveNetworkFromNode(nodeid string, netid string) (*fog05s
 	}
 
 	var net fog05sdk.VirtualNetwork
-	v, err := json.Marshal(*res.Result)
-	if err != nil {
-		return nil, err
-	}
 
-	err = json.Unmarshal([]byte(v), &net)
+	err = json.Unmarshal([]byte(*res.Result), &net)
 	if err != nil {
 		return nil, err
 	}
@@ -376,12 +368,8 @@ func (n *NetworkAPI) AddRouterPort(nodeid string, routerid string, portType stri
 	}
 
 	var r fog05sdk.RouterRecord
-	v, err := json.Marshal(*res.Result)
-	if err != nil {
-		return nil, err
-	}
 
-	err = json.Unmarshal([]byte(v), &r)
+	err = json.Unmarshal([]byte(*res.Result), &r)
 	if err != nil {
 		return nil, err
 	}
@@ -400,12 +388,8 @@ func (n *NetworkAPI) RemoveRouterPort(nodeid string, routerid string, vnetid str
 	}
 
 	var r fog05sdk.RouterRecord
-	v, err := json.Marshal(*res.Result)
-	if err != nil {
-		return nil, err
-	}
 
-	err = json.Unmarshal([]byte(v), &r)
+	err = json.Unmarshal([]byte(*res.Result), &r)
 	if err != nil {
 		return nil, err
 	}
@@ -424,12 +408,8 @@ func (n *NetworkAPI) CreateFloatingIP(nodeid string) (*fog05sdk.FloatingIPRecord
 	}
 
 	var fip fog05sdk.FloatingIPRecord
-	v, err := json.Marshal(*res.Result)
-	if err != nil {
-		return nil, err
-	}
 
-	err = json.Unmarshal([]byte(v), &fip)
+	err = json.Unmarshal([]byte(*res.Result), &fip)
 	if err != nil {
 		return nil, err
 	}
@@ -448,12 +428,8 @@ func (n *NetworkAPI) DeleteFloatingIP(nodeid string, ipid string) (*fog05sdk.Flo
 	}
 
 	var fip fog05sdk.FloatingIPRecord
-	v, err := json.Marshal(*res.Result)
-	if err != nil {
-		return nil, err
-	}
 
-	err = json.Unmarshal([]byte(v), &fip)
+	err = json.Unmarshal([]byte(*res.Result), &fip)
 	if err != nil {
 		return nil, err
 	}
@@ -493,12 +469,8 @@ func (n *NetworkAPI) RetainFloatingIP(nodeid string, ipid string, cpid string) (
 	}
 
 	var fip fog05sdk.FloatingIPRecord
-	v, err := json.Marshal(*res.Result)
-	if err != nil {
-		return nil, err
-	}
 
-	err = json.Unmarshal([]byte(v), &fip)
+	err = json.Unmarshal([]byte(*res.Result), &fip)
 	if err != nil {
 		return nil, err
 	}
@@ -599,11 +571,6 @@ func (f *FDUAPI) Onboard(descriptor fog05sdk.FDU) (*fog05sdk.FDU, error) {
 		return nil, &fog05sdk.FError{*res.ErrorMessage + " ErrNo: " + string(*res.Error), nil}
 	}
 
-	// v, err := json.Marshal(*res.Result)
-	// if err != nil {
-	// 	return nil, err
-	// }
-
 	err = json.Unmarshal([]byte(*res.Result), &fdu)
 	if err != nil {
 		return nil, err
@@ -655,12 +622,7 @@ func (f *FDUAPI) Define(nodeid string, fduid string) (*fog05sdk.FDURecord, error
 		return nil, &fog05sdk.FError{*res.ErrorMessage + " ErrNo: " + string(*res.Error), nil}
 	}
 
-	v, err := json.Marshal(*res.Result)
-	if err != nil {
-		return nil, err
-	}
-
-	err = json.Unmarshal([]byte(v), &fdu)
+	err = json.Unmarshal([]byte(*res.Result), &fdu)
 	if err != nil {
 		return nil, err
 	}
