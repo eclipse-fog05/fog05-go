@@ -8,4 +8,4 @@ require (
 	github.com/google/uuid v1.1.2
 )
 
-replace github.com/eclipse-fog05/sdk-go => github.com/gabrik/sdk-go v0.0.0-20200907124239-c92be99b23f6
+replace github.com/eclipse-fog05/sdk-go => github.com/gabrik/sdk-go v0.0.0-20200928071657-3f32dfac6025
