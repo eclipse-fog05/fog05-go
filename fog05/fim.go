@@ -173,6 +173,12 @@ func (n *NetworkAPI) AddNetwork(descriptor fog05sdk.VirtualNetwork) error {
 	return n.connector.Global.Desired.AddNetwork(n.sysid, n.tenantid, descriptor.UUID, descriptor)
 }
 
+// GetNetwork gets a virtual network from the system catalog
+func (n *NetworkAPI) GetNetwork(netid string) (*fog05sdk.VirtualNetwork, error) {
+	return n.connector.Global.Actual.GetNetwork(n.sysid, n.tenantid, netid)
+
+}
+
 // RemoveNetwork remove a virtual network from the system catalog
 func (n *NetworkAPI) RemoveNetwork(netid string) error {
 	return n.connector.Global.Desired.RemoveNetwork(n.sysid, n.tenantid, netid)
@@ -196,12 +202,8 @@ func (n *NetworkAPI) AddNetworkToNode(nodeid string, descriptor fog05sdk.Virtual
 	}
 
 	var net fog05sdk.VirtualNetwork
-	v, err := json.Marshal(*res.Result)
-	if err != nil {
-		return nil, err
-	}
 
-	err = json.Unmarshal([]byte(v), &net)
+	err = json.Unmarshal([]byte(*res.Result), &net)
 	if err != nil {
 		return nil, err
 	}
@@ -224,12 +226,8 @@ func (n *NetworkAPI) RemoveNetworkFromNode(nodeid string, netid string) (*fog05s
 	}
 
 	var net fog05sdk.VirtualNetwork
-	v, err := json.Marshal(*res.Result)
-	if err != nil {
-		return nil, err
-	}
 
-	err = json.Unmarshal([]byte(v), &net)
+	err = json.Unmarshal([]byte(*res.Result), &net)
 	if err != nil {
 		return nil, err
 	}
@@ -370,12 +368,8 @@ func (n *NetworkAPI) AddRouterPort(nodeid string, routerid string, portType stri
 	}
 
 	var r fog05sdk.RouterRecord
-	v, err := json.Marshal(*res.Result)
-	if err != nil {
-		return nil, err
-	}
 
-	err = json.Unmarshal([]byte(v), &r)
+	err = json.Unmarshal([]byte(*res.Result), &r)
 	if err != nil {
 		return nil, err
 	}
@@ -394,12 +388,8 @@ func (n *NetworkAPI) RemoveRouterPort(nodeid string, routerid string, vnetid str
 	}
 
 	var r fog05sdk.RouterRecord
-	v, err := json.Marshal(*res.Result)
-	if err != nil {
-		return nil, err
-	}
 
-	err = json.Unmarshal([]byte(v), &r)
+	err = json.Unmarshal([]byte(*res.Result), &r)
 	if err != nil {
 		return nil, err
 	}
@@ -418,12 +408,8 @@ func (n *NetworkAPI) CreateFloatingIP(nodeid string) (*fog05sdk.FloatingIPRecord
 	}
 
 	var fip fog05sdk.FloatingIPRecord
-	v, err := json.Marshal(*res.Result)
-	if err != nil {
-		return nil, err
-	}
 
-	err = json.Unmarshal([]byte(v), &fip)
+	err = json.Unmarshal([]byte(*res.Result), &fip)
 	if err != nil {
 		return nil, err
 	}
@@ -442,12 +428,8 @@ func (n *NetworkAPI) DeleteFloatingIP(nodeid string, ipid string) (*fog05sdk.Flo
 	}
 
 	var fip fog05sdk.FloatingIPRecord
-	v, err := json.Marshal(*res.Result)
-	if err != nil {
-		return nil, err
-	}
 
-	err = json.Unmarshal([]byte(v), &fip)
+	err = json.Unmarshal([]byte(*res.Result), &fip)
 	if err != nil {
 		return nil, err
 	}
@@ -487,12 +469,8 @@ func (n *NetworkAPI) RetainFloatingIP(nodeid string, ipid string, cpid string) (
 	}
 
 	var fip fog05sdk.FloatingIPRecord
-	v, err := json.Marshal(*res.Result)
-	if err != nil {
-		return nil, err
-	}
 
-	err = json.Unmarshal([]byte(v), &fip)
+	err = json.Unmarshal([]byte(*res.Result), &fip)
 	if err != nil {
 		return nil, err
 	}
@@ -593,12 +571,7 @@ func (f *FDUAPI) Onboard(descriptor fog05sdk.FDU) (*fog05sdk.FDU, error) {
 		return nil, &fog05sdk.FError{*res.ErrorMessage + " ErrNo: " + string(*res.Error), nil}
 	}
 
-	v, err := json.Marshal(*res.Result)
-	if err != nil {
-		return nil, err
-	}
-
-	err = json.Unmarshal([]byte(v), &fdu)
+	err = json.Unmarshal([]byte(*res.Result), &fdu)
 	if err != nil {
 		return nil, err
 	}
@@ -611,13 +584,35 @@ func (f *FDUAPI) Offload(fduid string) (string, error) {
 	return fduid, err
 }
 
+// GetCompatibleNodes gets a list off compatible nodes in the system for the given fdu, node compatibility verification is decentralized each node verifies and then replies
+func (f *FDUAPI) GetCompatibleNodes(fduid string) ([]string, error) {
+	nodes := []string{}
+	fdu, err := f.connector.Global.Actual.GetCatalogFDUInfo(f.sysid, f.tenantid, fduid)
+	if err != nil {
+		return nodes, err
+	}
+	res, err := f.connector.Global.Actual.CallMultiNodeCheck(f.sysid, f.tenantid, *fdu)
+	if err != nil {
+		return nodes, err
+	}
+	for _, evr := range res {
+		var compatibility fog05sdk.CompatibleNodeResponse
+
+		err = json.Unmarshal([]byte(*evr.Result), &compatibility)
+		if err != nil {
+			return nodes, err
+		}
+		if compatibility.IsCompatible {
+			nodes = append(nodes, compatibility.UUID)
+		}
+	}
+	return nodes, nil
+}
+
 // Define creates and FDU Instance for the specified FDU in the specified node and returns the FDURecord object associated
 func (f *FDUAPI) Define(nodeid string, fduid string) (*fog05sdk.FDURecord, error) {
 	var fdu fog05sdk.FDURecord
-	_, err := f.connector.Global.Actual.GetCatalogFDUInfo(f.sysid, f.tenantid, fduid)
-	if err != nil {
-		return nil, err
-	}
+
 	res, err := f.connector.Global.Actual.DefineFDUInNode(f.sysid, f.tenantid, nodeid, fduid)
 	if err != nil {
 		return nil, err
@@ -627,12 +622,7 @@ func (f *FDUAPI) Define(nodeid string, fduid string) (*fog05sdk.FDURecord, error
 		return nil, &fog05sdk.FError{*res.ErrorMessage + " ErrNo: " + string(*res.Error), nil}
 	}
 
-	v, err := json.Marshal(*res.Result)
-	if err != nil {
-		return nil, err
-	}
-
-	err = json.Unmarshal([]byte(v), &fdu)
+	err = json.Unmarshal([]byte(*res.Result), &fdu)
 	if err != nil {
 		return nil, err
 	}
