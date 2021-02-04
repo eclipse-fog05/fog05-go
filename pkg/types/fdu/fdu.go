@@ -16,6 +16,8 @@ package fdu
 import (
 	"net"
 
+	"encoding/json"
+
 	"github.com/Masterminds/semver"
 	"github.com/google/uuid"
 )
@@ -95,26 +97,26 @@ const (
 
 // ScalingPolicy represent the scaling policy for an FDU Instance
 type ScalingPolicy struct {
-	Metric               string  `json:"metric"`
-	ScaleUpThreshold     float32 `json:"scale_up_threshold"`
-	ScaleDownThreshold   float32 `json:"scale_down_threshold"`
-	ThresholdSensibility uint8   `json:"threshold_sensibility"`
-	ProbeInterveal       float32 `json:"probe_interveal"`
-	MinReplicas          uint8   `json:"min_replicas"`
-	MaxReplicas          uint8   `json:"max_replicas"`
+	Metric               string      `json:"metric"`
+	ScaleUpThreshold     json.Number `json:"scale_up_threshold"`
+	ScaleDownThreshold   json.Number `json:"scale_down_threshold"`
+	ThresholdSensibility uint8       `json:"threshold_sensibility"`
+	ProbeInterveal       json.Number `json:"probe_interveal"`
+	MinReplicas          uint8       `json:"min_replicas"`
+	MaxReplicas          uint8       `json:"max_replicas"`
 }
 
 // Position represents the FDU Position
 type Position struct {
-	Latitude  string  `json:"lat"`
-	Longitude string  `json:"lon"`
-	Radius    float64 `json:"radius"`
+	Latitude  string      `json:"lat"`
+	Longitude string      `json:"lon"`
+	Radius    json.Number `json:"radius"`
 }
 
 // Proximity represents the FDU Proximity
 type Proximity struct {
-	Neighbor string  `json:"neighbor"`
-	Radius   float64 `json:"radius"`
+	Neighbor string      `json:"neighbor"`
+	Radius   json.Number `json:"radius"`
 }
 
 // Configuration represents the FDU Configuration
