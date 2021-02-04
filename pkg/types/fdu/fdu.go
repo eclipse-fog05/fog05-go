@@ -17,8 +17,9 @@ import (
 	"net"
 
 	"encoding/json"
+	// Leaving it here as the plan it to use it.
+	_ "github.com/Masterminds/semver"
 
-	"github.com/Masterminds/semver"
 	"github.com/google/uuid"
 )
 
@@ -189,8 +190,8 @@ type FDUDescriptor struct {
 	UUID                     *uuid.UUID                  `json:"uuid,omitempty"`
 	ID                       string                      `json:"id"`
 	Name                     string                      `json:"name"`
-	Version                  semver.Version              `json:"version"`
-	FDUVersion               semver.Version              `json:"fdu_version"`
+	Version                  string                      `json:"version"`
+	FDUVersion               string                      `json:"fdu_version"`
 	Description              *string                     `json:"description,omitempty"`
 	Hypervisor               string                      `json:"hypervisor"`
 	Image                    *Image                      `json:"image,omitempty"`
