@@ -140,7 +140,7 @@ type ComputationalRequirements struct {
 	CPUMinCount     uint8   `json:"cpu_min_count"`
 	GPUMinCount     uint8   `json:"gpu_min_count"`
 	FPGAMinCount    uint8   `json:"fpga_min_count"`
-	OperatingSystem *string `json:"operating_system,omitempty`
+	OperatingSystem *string `json:"operating_system,omitempty"`
 	RAMSizeMB       uint32  `json:"ram_size_mb"`
 	StorageSizeMB   uint32  `json:"storage_size_gb"`
 }
@@ -160,7 +160,7 @@ type VirtualInterface struct {
 
 // ConnectionPointDescriptor ...
 type ConnectionPointDescriptor struct {
-	UUID   *uuid.UUID `json:"uuid,omitempty`
+	UUID   *uuid.UUID `json:"uuid,omitempty"`
 	Name   string     `json:"name"`
 	ID     string     `json:"id"`
 	VldRef *string    `json:"vld_ref,omitempty"`
