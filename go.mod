@@ -1,4 +1,4 @@
-module fog05-go
+module github.com/eclipse-fog05/fog05-go
 
 go 1.15
 
