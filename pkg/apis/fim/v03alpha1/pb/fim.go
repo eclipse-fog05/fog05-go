@@ -117,7 +117,7 @@ func (f *FDUAPI) DefineFDU(fduUUID uuid.UUID) (*fdu.FDURecord, error) {
 
 	//convert to fdu.FDURecord
 
-	b, err = json.Marshal(resp.ok)
+	b, err := json.Marshal(resp.ok)
 	if err != nil {
 		return nil, err
 	}
