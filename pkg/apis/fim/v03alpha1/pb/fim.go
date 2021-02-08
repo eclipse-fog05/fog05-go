@@ -25,7 +25,7 @@ import (
 	"github.com/eclipse-fog05/fog05-go/types/fdu"
 	"google.golang.org/grpc"
 
-	fdu_pb "github.com/eclipse-fog05/fog05-go/types/fdu/pb"
+	fdu_pb "github.com/eclipse-fog05/fog05-go/pkg/types/fdu/pb"
 )
 
 // FDUAPI is a component of FIMAPI
