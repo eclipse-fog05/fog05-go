@@ -157,7 +157,7 @@ type GeographicalRequirements struct {
 // VirtualInterface represents the FDU Virtual Interface
 type VirtualInterface struct {
 	VIfKind   string  `json:"vif_kind"`
-	parent    *string `json:"parent,omitempty"`
+	Parent    *string `json:"parent,omitempty"`
 	Bandwidth *uint8  `json:"bandwidth,omitempty"`
 }
 
@@ -225,7 +225,7 @@ type StorageRecord struct {
 	UUID               string  `json:"uuid"`
 	StorageID          string  `json:"storage_id"`
 	StorageType        string  `json:"storage_type"`
-	Size               int     `json:"size"`
+	Size               uint32  `json:"size"`
 	FileSystemProtocol *string `json:"file_system_protocol,omitempty"`
 	CPID               *string `json:"cp_id,omitempty"`
 }

@@ -1,0 +1,161 @@
+syntax = "proto3";
+package pb;
+
+service FDUApi {
+    rpc OnboardFDU(FDUDescriptor) returns (OnboardFDUReply);
+    rpc DefineFDU (DefineFDURequest) returns (DefineFDUReply);
+}
+
+message DefineFDURequest {
+    string uuid = 1;
+}
+
+message Position {
+    string latitude = 1;
+    string longiture = 2;
+    double radius = 3;
+}
+
+message Proximity {
+    string neighbor = 1;
+    double radius = 2;
+}
+
+message Configuration {
+    string conf_type = 1;
+    string script = 2;
+    string ssh_keys = 3;
+}
+
+message Image {
+    string uuid = 1;
+    string name = 2;
+    string uri = 3;
+    string checksum = 4;
+    string format = 5;
+}
+
+message ComputationalRequirements {
+    string cpu_arch = 1;
+    uint64 cpu_min_frequency = 2;
+    uint32 cpu_min_count = 3;
+    uint32 gpu_min_count = 4;
+    uint32 fpga_min_count = 5;
+    string operating_system = 6;
+    uint32 ram_size_mb = 7;
+    uint32 strogate_size_mb = 8;
+}
+
+
+message GeographicalRequirements {
+    Position position = 1;
+    repeated Proximity proximity = 2;
+}
+
+message VirtualInterface {
+    string vif_kind = 1;
+    string parent = 2;
+    uint32 bandwidth = 3;
+}
+
+message ConnectionPointDescriptor {
+    string uuid = 1;
+    string name = 2;
+    string id = 3;
+    string vld_ref = 4;
+}
+
+message Interface {
+    string name = 1;
+    string kind = 2;
+    string mac_address = 3;
+    VirtualInterface virtual_interface = 4;
+    string cp_id = 5;
+}
+
+message StorageDescriptor {
+    string id = 1;
+    string storage_kind = 2;
+    uint32 size = 3;
+}
+
+
+message FDUDescriptor {
+    string uuid = 1;
+    string id = 2;
+    string name = 3;
+    string version = 4;
+    string fdu_version = 5;
+    string description = 6;
+    string hypervisor = 7;
+    Image image = 8;
+    string hypervisor_specific = 9;
+    ComputationalRequirements computation_requirements = 10;
+    GeographicalRequirements geographical_requirements = 11;
+    repeated Interface interfaces = 12;
+    repeated StorageDescriptor storage = 13;
+    repeated ConnectionPointDescriptor connection_points = 14;
+    Configuration configuration = 15;
+    string migration_kind = 16;
+    uint32 replicas = 17;
+    repeated string depends_on = 18;
+}
+
+
+
+// Record
+
+message ConnectionPointRecord {
+    string uuid = 1;
+    string id = 2;
+}
+
+message VirtualInterfaceRecord {
+    string vif_kind = 1;
+    uint32 bandwidth = 2;
+}
+
+message InterfaceRecord {
+    string name = 1;
+    string kind = 2;
+    string mac_address = 3;
+    VirtualInterfaceRecord virtual_interface = 4;
+    string cp_uuid = 5;
+    string intf_uuid = 6;
+}
+
+
+message StorageRecord {
+    string uuid = 1;
+    string storage_id = 2;
+    string storage_type = 3;
+    uint32 size = 4;
+    string file_system_protocol = 5;
+    string cp_id = 6;
+}
+
+message FDURecord {
+    string uuid = 1;
+    string fdu_uuid = 2;
+    string node = 3;
+    repeated InterfaceRecord interfaces = 4;
+    repeated ConnectionPointRecord conenciton_points = 5;
+    string status = 6;
+    string error = 7;
+    bytes hypervisor_specific = 8;
+    uint32 restarts = 9;
+}
+
+
+message DefineFDUReply {
+    FDURecord ok = 1;
+    string error = 2;
+}
+
+message OnboardFDUReply {
+    FDUDescriptor ok = 1;
+    string error = 2;
+}
+
+
+
