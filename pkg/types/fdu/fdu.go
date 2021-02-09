@@ -145,7 +145,7 @@ type ComputationalRequirements struct {
 	FPGAMinCount    uint8   `json:"fpga_min_count"`
 	OperatingSystem *string `json:"operating_system,omitempty"`
 	RAMSizeMB       uint32  `json:"ram_size_mb"`
-	StorageSizeMB   uint32  `json:"storage_size_gb"`
+	StorageSizeMB   uint32  `json:"storage_size_mb"`
 }
 
 // GeographicalRequirements represents the FDU Geographical Requirements
