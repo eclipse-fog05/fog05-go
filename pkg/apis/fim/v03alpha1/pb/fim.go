@@ -30,9 +30,9 @@ import (
 
 // FDUAPI is a component of FIMAPI
 type FDUAPI struct {
-	endpoint string
-	sysid    string
-	tenantid string
+	Endpoint string
+	Sysid    string
+	Tenantid string
 }
 
 // OnboardFDU onboards an FDU into the catalog
@@ -51,7 +51,7 @@ func (f *FDUAPI) OnboardFDU(descriptor fdu.FDUDescriptor) (*fdu.FDUDescriptor, e
 	}
 
 	// creating grpc connection
-	conn, err = grpc.Dial(fmt.Sprintf("%s:9000", f.endpoint), grpc.WithInsecure())
+	conn, err = grpc.Dial(fmt.Sprintf("%s:9000", f.Endpoint), grpc.WithInsecure())
 	if err != nil {
 		log.Error("DefineFDU, dial error :%s", err)
 		return nil, err
@@ -95,7 +95,7 @@ func (f *FDUAPI) DefineFDU(fduUUID uuid.UUID) (*fdu.FDURecord, error) {
 	}
 
 	// creating grpc connection
-	conn, err := grpc.Dial(fmt.Sprintf("%s:9000", f.endpoint), grpc.WithInsecure())
+	conn, err := grpc.Dial(fmt.Sprintf("%s:9000", f.Endpoint), grpc.WithInsecure())
 	if err != nil {
 		log.Error("DefineFDU, dial error :%s", err)
 		return nil, err
