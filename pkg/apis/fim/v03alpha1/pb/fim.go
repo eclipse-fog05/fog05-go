@@ -72,7 +72,7 @@ func (f *FDUAPI) OnboardFDU(descriptor fdu.FDUDescriptor) (*fdu.FDUDescriptor, e
 
 	//convert to fdu.FDUDescriptor
 
-	b, err = json.Marshal(resp.ok)
+	b, err = json.Marshal(resp.Ok)
 	if err != nil {
 		return nil, err
 	}
@@ -116,7 +116,7 @@ func (f *FDUAPI) DefineFDU(fduUUID uuid.UUID) (*fdu.FDURecord, error) {
 
 	//convert to fdu.FDURecord
 
-	b, err := json.Marshal(resp.ok)
+	b, err := json.Marshal(resp.Ok)
 	if err != nil {
 		return nil, err
 	}
