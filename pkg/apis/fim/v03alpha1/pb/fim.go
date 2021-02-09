@@ -66,7 +66,7 @@ func (f *FDUAPI) OnboardFDU(descriptor fdu.FDUDescriptor) (*fdu.FDUDescriptor, e
 		return nil, err
 	}
 
-	if resp.error != "" {
+	if resp.Error != "" {
 		return nil, errors.New("math: square root of negative number")
 	}
 
@@ -110,7 +110,7 @@ func (f *FDUAPI) DefineFDU(fduUUID uuid.UUID) (*fdu.FDURecord, error) {
 		return nil, err
 	}
 
-	if resp.error != "" {
+	if resp.Error != "" {
 		return nil, errors.New("math: square root of negative number")
 	}
 
