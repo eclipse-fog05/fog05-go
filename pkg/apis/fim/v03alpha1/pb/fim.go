@@ -14,6 +14,7 @@
 package pb
 
 import (
+	"context"
 	"encoding/json"
 	"errors"
 	"fmt"
@@ -61,7 +62,7 @@ func (f *FDUAPI) OnboardFDU(descriptor fdu.FDUDescriptor) (*fdu.FDUDescriptor, e
 	c := fdu_pb.NewFDUApiClient(conn)
 
 	// calling api
-	resp, err := c.OnboardFDU(gDesc)
+	resp, err := c.OnboardFDU(context.Background(), &gDesc)
 	if err != nil {
 		return nil, err
 	}
@@ -90,7 +91,7 @@ func (f *FDUAPI) DefineFDU(fduUUID uuid.UUID) (*fdu.FDURecord, error) {
 	var conn *grpc.ClientConn
 
 	var gRequest = fdu_pb.DefineFDURequest{
-		uuid: fduUUID.String(),
+		Uuid: fduUUID.String(),
 	}
 
 	// creating grpc connection
@@ -105,7 +106,7 @@ func (f *FDUAPI) DefineFDU(fduUUID uuid.UUID) (*fdu.FDURecord, error) {
 	c := fdu_pb.NewFDUApiClient(conn)
 
 	// calling api
-	resp, err := c.DefineFDU(gRequest)
+	resp, err := c.DefineFDU(context.Background(), &gRequest)
 	if err != nil {
 		return nil, err
 	}
